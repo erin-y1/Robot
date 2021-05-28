@@ -3,12 +3,12 @@ using namespace std;
 char Board[10][10];
 
 class Robot {
-    private:
+    private: //data fields
         int xLocation;
         int yLocation;
         bool cargoBed;
         char load;
-    public:
+    public: //constructors
         Robot();
         Robot(int xLocation, int yLocation, bool cargoBed, char load);
         void setXLocation(int xLocation);
@@ -27,49 +27,49 @@ class Robot {
 };
 
 
-Robot::Robot(){
+Robot::Robot(){ //default constructor
 }
 
-Robot::Robot(int xLocation, int yLocation, bool cargoBed, char load){
+Robot::Robot(int xLocation, int yLocation, bool cargoBed, char load){ //constructor with parameter
    this->xLocation = xLocation;
    this->yLocation = yLocation;
    this->cargoBed = cargoBed;
    this->load = load;
 }
 
-void Robot::setXLocation(int xLocation){
+void Robot::setXLocation(int xLocation){ //sets new x location
    this->xLocation = xLocation;
 }
 
-void Robot::setYLocation(int yLocation){
+void Robot::setYLocation(int yLocation){ //sets new y location
    this->yLocation = yLocation;
 }
 
-void Robot::setCargoBed(bool cargoBed){
+void Robot::setCargoBed(bool cargoBed){ //sets load on cargo to be true or false
    this->cargoBed = cargoBed;
 }
 
-void Robot::setLoad(char load){
+void Robot::setLoad(char load){ //sets new load 
    this->load = load;
 }
 
-int Robot::getXLocation() const{
+int Robot::getXLocation() const{ //gets x location
    return xLocation;
 }
 
-int Robot::getYLocation() const{
+int Robot::getYLocation() const{ //gets y location
    return yLocation;
 }
 
-bool Robot::getCargoBed() const{
+bool Robot::getCargoBed() const{ //checks if there is load
    return cargoBed;
 }
 
-char Robot::getLoad() const{
+char Robot::getLoad() const{ //gets load
    return load;
 }
 
-bool Robot::MoveTo(int x, int y){
+bool Robot::MoveTo(int x, int y){ //moves to the given x and y coordinates on board
 
    if (x >= 0 && x < 10 && y >= 0 && y < 10)
    {
@@ -104,7 +104,7 @@ bool Robot::MoveTo(int x, int y){
    return false;
 }
 
-bool Robot::pickUp(int x, int y)
+bool Robot::pickUp(int x, int y) //picks up load on given coordinates
 {
    if (Board[x][y] != '.' && cargoBed == false && load == '.'){
        MoveTo(x, y);
@@ -116,7 +116,7 @@ bool Robot::pickUp(int x, int y)
    return false;
 }
 
-bool Robot::dropOff(int x, int y)
+bool Robot::dropOff(int x, int y) //drops off load on given coordinates
 {
    if (Board[x][y] == '.' && cargoBed == true && load != '.')
    {
@@ -128,16 +128,16 @@ bool Robot::dropOff(int x, int y)
    return false;
 }
 
-Robot::~Robot(){
+Robot::~Robot(){ //destructor
 }
 
-ostream& operator<<(ostream& os, const Robot& Obj)
+ostream& operator<<(ostream& os, const Robot& Obj) //friend function that can be given special access to private memebers
 {
    os << "ROBOT: (" << Obj.getXLocation() << ", " << Obj.getYLocation() << ") :" << Obj.getLoad() << endl;
    return os;
 }
 
-void print2D(){
+void print2D(){ //prints board
    for (int i = 0; i < 10; i++){
        for (int j = 0; j < 10; j++){
            cout << Board[i][j] << " ";
@@ -147,7 +147,7 @@ void print2D(){
    cout << endl << endl;
 }
 
-void initialize2D(){
+void initialize2D(){ //initial place of load
    for (int i = 0; i < 10; i++){
        for (int j = 0; j < 10; j++){
            Board[i][j] = '.';
@@ -157,7 +157,7 @@ void initialize2D(){
    Board[2][6] = 'C';
 }
 
-void clear(char grid[10][10]){
+void clear(char grid[10][10]){ //deletes robot if there is no load
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             if(grid[i][j] != '.'){
